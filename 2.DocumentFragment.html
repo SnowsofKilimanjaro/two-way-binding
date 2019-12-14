@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Two-way-data-binding</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <input type="text" id="a" />
+      <span id="b"></span>
+    </div>
+  </body>
+  <script>
+    function nodeToFragment(node) {
+      var flag = document.createDocumentFragment();
+      var child;
+      //appendChild 方法有个隐蔽的地方，就是调用以后 child 会从原来 DOM 中移除
+      // 所以，第二次循环时，node.firstChild 已经不再是之前的第一个子元素了
+      while ((child = node.firstChild)) {
+        flag.appendChild(child); //劫持node的所有子节点
+      }
+      return flag;
+    }
+    var dom = nodeToFragment(document.getElementById("app"));
+    console.log(dom);
+    document.getElementById("app").appendChild(dom);
+  </script>
+</html>

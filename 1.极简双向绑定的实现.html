@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Two-way-data-binding</title>
+</head>
+
+<body>
+    <input type="text" id="a">
+    <span id="b"></span>
+
+</body>
+<script>
+    var obj = {}
+    Object.defineProperty(obj, 'hello', {
+        set: function (newval) {
+            document.getElementById('a').value = newval
+            document.getElementById('b').innerHTML = newval
+        }
+    })
+    document.addEventListener('keyup', function (e) {
+        obj.hello = e.target.value
+    })
+</script>
+
+</html>
